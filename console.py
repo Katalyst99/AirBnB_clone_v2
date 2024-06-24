@@ -123,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[lineStr[0]]()
-        argList = {}
         for string in lineStr[1:]:
             key, v = string.split('=')
             if v[0] == '"':
