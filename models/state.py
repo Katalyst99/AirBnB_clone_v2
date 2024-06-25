@@ -2,7 +2,7 @@
 """ State Module for HBNB project """
 from os import getenv
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String,
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
 
@@ -15,6 +15,8 @@ class State(BaseModel, Base):
         cities = relationship("City", cascade="all, delete-orphan",
                               backref="state")
     else:
+        name = ""
+
         @property
         def cities(self):
             """Gettter atribute that returns City objects"""
@@ -23,6 +25,3 @@ class State(BaseModel, Base):
                 if city_val.state_id == self.id:
                     cities_obj.append(city_val)
             return cities_obj
-
-
-
