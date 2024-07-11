@@ -4,7 +4,7 @@ Fabric script(based on the file 1-pack_web_static.py) that,
 distributes an archive to web servers, using the function do_deploy.
 """
 from fabric.api import *
-import os
+from os.path import exists
 
 env.hosts = ['54.160.66.54', '34.224.2.3']
 env.user = "ubuntu"
@@ -13,7 +13,7 @@ env.key_filename = '~/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """Function that distributes an archive to web servers"""
-    if not os.path.exists(archive_path):
+    if exists(archive_path) is False:
         return False
 
     f = archive_path.split('/')[-1]
