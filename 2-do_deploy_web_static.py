@@ -23,8 +23,8 @@ def do_deploy(archive_path):
         run(f"mkdir -p /data/web_static/releases/{f_xt}/")
         run(f"tar -xzf /tmp/{f} -C /data/web_static/releases/{f_xt}/")
         run(f"rm /tmp/{f}")
-        run(f"mv /data/web_static/releases/{f_xt}/web_static/*\
-                /data/web_static/releases/{f_xt}/")
+        run('mv /data/web_static/releases/{}/web_static/* '
+            '/data/web_static/releases/{}/'.format(f_xt, f_xt))
         run(f"rm -rf /data/web_static/releases/{f_xt}/web_static")
         run("rm -rf /data/web_static/current")
         run(
