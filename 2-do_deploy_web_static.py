@@ -19,16 +19,15 @@ def do_deploy(archive_path):
     try:
         f = archive_path.split('/')[-1]
         f_xt = f.split(".")[0]
+        dest = '/data/web_static/releases/'
         put(archive_path, "/tmp/")
-        run(f"mkdir -p /data/web_static/releases/{f_xt}/")
-        run(f"tar -xzf /tmp/{f} -C /data/web_static/releases/{f_xt}/")
+        run(f"mkdir -p {dest}{f_xt}/")
+        run(f"tar -xzf /tmp/{f} -C {dest}{f_xt}/")
         run(f"rm /tmp/{f}")
-        run('mv /data/web_static/releases/{}/web_static/* '
-            '/data/web_static/releases/{}/'.format(f_xt, f_xt))
-        run(f"rm -rf /data/web_static/releases/{f_xt}/web_static")
+        run('mv {0}{1}/web_static/* {0}{1}/'.format(dest, f_xt))
+        run(f"rm -rf {dest}{f_xt}/web_static")
         run("rm -rf /data/web_static/current")
-        run(
-         f"ln -s /data/web_static/releases/{f_xt}/ /data/web_static/current")
+        run(f"ln -s {dest}{f_xt}/ /data/web_static/current")
         return True
     except:
         return False
