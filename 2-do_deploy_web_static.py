@@ -20,14 +20,15 @@ def do_deploy(archive_path):
     f_xt = f.split(".")[0]
     try:
         put(archive_path, "/tmp/")
-        run(f"mkdir -p /data/web_static/releases/{f_xt}")
-        run(f"tar -xzf /tmp/{f} -C /data/web_static/releases/{f_xt}")
+        run(f"mkdir -p /data/web_static/releases/{f_xt}/")
+        run(f"tar -xzf /tmp/{f} -C /data/web_static/releases/{f_xt}/")
         run(f"rm /tmp/{f}")
-        run(f"mv /data/web_static/releases/{f_xt}/web_static/* \
-            /data/web_static/releases/{f_xt}")
+        run(f"mv /data/web_static/releases/{f_xt}/web_static/*\
+                /data/web_static/releases/{f_xt}/")
         run(f"rm -rf /data/web_static/releases/{f_xt}/web_static")
-        run(f"rm -rf /data/web_static/current")
-        run(f"ln -s /data/web_static/releases/{f_xt} /data/web_static/current")
+        run("rm -rf /data/web_static/current")
+        run(
+         f"ln -s /data/web_static/releases/{f_xt}/ /data/web_static/current")
         return True
     except Exception:
         return False
