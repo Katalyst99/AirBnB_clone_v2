@@ -2,18 +2,19 @@
 """A script that starts a Flask web application"""
 from models import storage
 from flask import Flask, render_template
+from models.state import State
 
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
     """
-    Displays a HTML page with the list of all State objects present, 
-    in DBStorage sorted by name (A->Z
+    Displays a HTML page with the list of  City objects linked to the State
+    sorted by name (A->Z)
     """
     name_state = storage.all(State)
-    return render_template('')
+    return render_template('8-cities_by_states.html', name_state=name_state)
 
 
 if __name__ == "__main__":
