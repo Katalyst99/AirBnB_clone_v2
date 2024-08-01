@@ -4,19 +4,18 @@ from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 from models.city import City
+import models
 
 
 class State(BaseModel, Base):
     """ State class """
-    if getenv('HBNB_TYPE_STORAGE') == "db":
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="all, delete-orphan",
-                              backref="state")
-    else:
-        name = ""
-
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", cascade="all, delete-orphan",
+                          backref="state")
+    if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def cities(self):
             """Gettter atribute that returns City objects"""
